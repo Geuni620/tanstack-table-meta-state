@@ -1,6 +1,8 @@
 import { type ColumnDef } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { ArrowUpDown } from 'lucide-react';
+import { Input } from 'src/components/ui/input';
+import { useState } from 'react';
 
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -71,6 +73,24 @@ export const columns: ColumnDef<ColumnDataProps>[] = [
     accessorKey: 'notes',
     header: 'Notes',
     cell: ({ row }) => <p>{row.getValue('notes')}</p>,
+    enableSorting: false,
+  },
+  {
+    id: 'input',
+    header: 'Input',
+    cell: ({ row }) => {
+      const [value, setValue] = useState('');
+
+      console.log('row', row.id, value);
+
+      return (
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Enter value"
+        />
+      );
+    },
     enableSorting: false,
   },
 ];

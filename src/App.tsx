@@ -1,9 +1,16 @@
 import { useState } from 'react';
 
+import type { TableMeta, RowData } from '@tanstack/react-table';
 import { TableComponents } from '@/components/table';
 import { columns } from '@/components/table/columns';
 import { TableCaption } from '@/components/ui/table';
 import DATA from '@/data';
+
+declare module '@tanstack/table-core' {
+  interface TableMeta<TData extends RowData> {
+    foo: string;
+  }
+}
 
 function App() {
   const [data] = useState(DATA);
